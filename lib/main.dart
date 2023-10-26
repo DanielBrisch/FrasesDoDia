@@ -1,55 +1,54 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp( MaterialApp(
+  runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     title: "Frases do dia",
-    home: _HomeStateful(),
+    home: HomeStateful(),
   ));
 }
 
-class _HomeStateful extends StatefulWidget {
-  const _HomeStateful({super.key});
+class HomeStateful extends StatefulWidget {
+  const HomeStateful({Key? key}) : super(key: key);
 
   @override
-  State<_HomeStateful> createState() => _HomeStatefulStateState();
+  _HomeStatefulState createState() => _HomeStatefulState();
 }
 
-class _HomeStatefulStateState extends State<_HomeStateful> {
+class _HomeStatefulState extends State<HomeStateful> {
+
+  var _texto = "PRIMEIRO";
+
   @override
   Widget build(BuildContext context) {
-    var _titulo = "NuBank";
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(_titulo),
+        title: Text("NuBank"),
         backgroundColor: Colors.deepPurpleAccent,
       ),
-      body: Padding(
-          padding: EdgeInsets.all(16),
-          child: Text("Conteudo Teste")
-      ),
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.deepPurpleAccent,
-        child: Padding(
-            padding: EdgeInsets.all(16),
-            child: Row(
-              children: [
-                Text("TESTE "),
-                Text("TESTE "),
-                Text("TESTE "),
-              ],
-            )
+      body: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  if (_texto == "PRIMEIRO") {
+                    _texto = "Curso Flutter";
+                  } else {
+                    _texto = "PRIMEIRO";
+                  }
+                });
+              },
+              child: Text("Clique aqui"),
+              style: ElevatedButton.styleFrom(primary: Colors.black26),
+            ),
+            Text("Nome: $_texto"),
+          ],
         ),
       ),
-    );;
-  }
-}
-
-
-class Home extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    return;
+    );
   }
 }
