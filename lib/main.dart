@@ -1,72 +1,61 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
 
-void main() {
+void main(){
   runApp(MaterialApp(
+    home: Home(),
     debugShowCheckedModeBanner: false,
-    title: "Frases do dia",
-    home: HomeStateful(),
   ));
 }
 
-T getItemAleatorio<T>(List<T> lista) {
-  var rng = Random();
-  return lista[rng.nextInt(lista.length)];
-}
-
-final List<String> frases = [
-    "Frase 1",
-    "Frase 2",
-    "Frase 3",
-    "Frase 4",
-];
-
-String fraseAtual = "Seja Bem Vindo(a)!!";
-
-class HomeStateful extends StatefulWidget {
-  const HomeStateful({Key? key}) : super(key: key);
+class Home extends StatefulWidget {
+  const Home({super.key});
 
   @override
-  _HomeStatefulState createState() => _HomeStatefulState();
+  State<Home> createState() => _HomeState();
 }
 
-class _HomeStatefulState extends State<HomeStateful> {
-  var _texto = "PRIMEIRO";
-
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Frases do Dia"),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.deepPurpleAccent,
       ),
       body: Container(
+        padding: EdgeInsets.all(16),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          border: Border.all(width: 7, color: Colors.amber)
+        ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
-                padding: EdgeInsets.only(top: 50),
-                child: Image.asset('assets/img/logo.png')), // Image
-            SizedBox(height: 40),
-            Center(
-              child: Container(
-                width: 140,
-                height: 40,
-                child: ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      getItemAleatorio(frases);
-                    });
-                  },
-                  child: Text("Clique aqui"),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.black26,
-                  ),
-                ),
+            Image.asset("assets/img/logo.png"),
+            Text(
+              "Clique abaixo para gerar uma frase!",
+              textAlign: TextAlign.justify,
+              style: TextStyle(
+                fontSize: 17,
+                fontStyle: FontStyle.italic,
+                color: Colors.black
               ),
             ),
-            SizedBox(height: 40),
-            Text("Nome: $_texto"),
+            ElevatedButton(
+              child: Text(
+                "Nova Frase",
+                  style: TextStyle(
+                    fontSize: 17,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold
+                  ),
+              ),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.deepPurpleAccent),
+              ),
+              onPressed: (){},
+            )
           ],
         ),
       ),
