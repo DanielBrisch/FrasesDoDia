@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main(){
   runApp(MaterialApp(
@@ -15,6 +16,24 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  var _frases = [
+    "Frase 1",
+    "Frase 2",
+    "Frase 3",
+    "Frase 4",
+  ];
+
+  var _fraseGerada = "Clique para gerar uma nova Frase";
+
+  void _gerarFrase() {
+    var numeroSorteado = Random().nextInt(_frases.length);
+
+    setState(() {
+      _fraseGerada = _frases[numeroSorteado];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,16 +44,13 @@ class _HomeState extends State<Home> {
       body: Container(
         padding: EdgeInsets.all(16),
         width: double.infinity,
-        decoration: BoxDecoration(
-          border: Border.all(width: 7, color: Colors.amber)
-        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset("assets/img/logo.png"),
             Text(
-              "Clique abaixo para gerar uma frase!",
+              _fraseGerada,
               textAlign: TextAlign.justify,
               style: TextStyle(
                 fontSize: 17,
@@ -54,7 +70,7 @@ class _HomeState extends State<Home> {
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.deepPurpleAccent),
               ),
-              onPressed: (){},
+              onPressed: _gerarFrase,
             )
           ],
         ),
